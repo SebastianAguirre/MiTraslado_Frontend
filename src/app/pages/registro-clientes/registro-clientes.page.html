@@ -1,0 +1,106 @@
+<ion-header class="ion-no-border">
+
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home" text="" icon="chevron-back-outline" color="primary"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Registrarse</ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <form name="newForm" [formGroup]="newForm">
+    <ion-list>
+
+      <ion-grid fixed>
+
+        <ion-row>
+          <ion-col size="5">
+            <ion-item>
+              <ion-label position="floating">Tipo de Documento</ion-label>
+              <ion-select placeholder="Seleccione" cancelText="Cancelar" okText="Aceptar" formControlName="tipo_documento">
+                <ion-select-option value="f">C.C</ion-select-option>
+                <ion-select-option value="m">T.I</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col size="7">
+            <ion-item>
+              <ion-label position="floating">N° Identificación</ion-label>
+              <ion-input formControlName="documento"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Nombre(s)</ion-label>
+              <ion-input formControlName="nombre"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Apellido</ion-label>
+              <ion-input formControlName="apellido"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Número Celular</ion-label>
+              <ion-input formControlName="celular"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Correo Electrónico</ion-label>
+              <ion-input formControlName="correo"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Usuario</ion-label>
+              <ion-input formControlName="usuario"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Contraseña</ion-label>
+              <ion-input formControlName="contrasena"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+      </ion-grid>
+
+    </ion-list>
+    <ion-item lines="none">
+      <ion-checkbox style="margin-right: 0.5em;" formControlName="terminos"></ion-checkbox>
+      <ion-label>
+        Acepto
+        <a href="">Términos y condiciones</a>
+      </ion-label>
+    </ion-item>
+    <ion-button (click)="onClick(newForm.value)" expand="full" fill="solid">
+      Registrarme
+    </ion-button>
+  </form>
+
+</ion-content>
