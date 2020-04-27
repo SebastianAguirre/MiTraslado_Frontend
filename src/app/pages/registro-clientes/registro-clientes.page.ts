@@ -16,7 +16,7 @@ export class RegistroClientesPage implements OnInit {
     this.newForm = this.createForm();
   }
 
-  onClick(form: any){
+  onClick(form: any) {
     console.log('Form', form);
   }
 

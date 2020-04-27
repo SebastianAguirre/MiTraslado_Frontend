@@ -1,0 +1,32 @@
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.page.html',
+  styleUrls: ['./login.page.scss'],
+})
+export class LoginPage implements OnInit {
+
+
+
+usuario = {
+  email : '',
+  password: ''
+};
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+
+
+
+
+  onSubmitTemplate() {
+
+  console.log('form.submit');
+  console.log(this.usuario);
+}
+
+}
