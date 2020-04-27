@@ -9,7 +9,11 @@ const routes: Routes = [
   {
     path: 'registro-clientes',
     loadChildren: () => import('./pages/registro-clientes/registro-clientes.module').then( m => m.RegistroClientesPageModule)
+  },  {
+    path: 'login',
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   },
+
 
 ];
 
