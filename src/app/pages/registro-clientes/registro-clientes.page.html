@@ -2,7 +2,7 @@
 
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="home" text="" icon="chevron-back-outline" color="primary"></ion-back-button>
+      <ion-back-button defaultHref="home" text="" icon="chevron-back-outline" color="primary" defaultHref="/"></ion-back-button>
     </ion-buttons>
     <ion-title>Registrarse</ion-title>
   </ion-toolbar>
@@ -20,7 +20,7 @@
           <ion-col size="5">
             <ion-item>
               <ion-label position="floating">Tipo de Documento</ion-label>
-              <ion-select placeholder="Seleccione" interface="popover" formControlName="tipo_documento">
+              <ion-select placeholder="Seleccione" interface="popover" formControlName="usuario_tipoDocumento">
                 <ion-select-option value="1">C.C</ion-select-option>
                 <ion-select-option value="2">T.I</ion-select-option>
               </ion-select>
@@ -28,53 +28,44 @@
           </ion-col>
           <ion-col size="7">
             <ion-item>
-              <ion-label position="floating">N° Identificación</ion-label>
-              <ion-input inputmode="text" formControlName="documento"></ion-input>
+              <ion-label position="floating">N° Documento</ion-label>
+              <ion-input inputmode="text" formControlName="usuario_documento"></ion-input>
             </ion-item>
           </ion-col>
         </ion-row>
 
         <ion-row>
-          <ion-col size="12">
+          <ion-col size-md="6" size="12">
             <ion-item>
               <ion-label position="floating">Nombre(s)</ion-label>
-              <ion-input inputmode="text" formControlName="nombre"></ion-input>
+              <ion-input inputmode="text" formControlName="usuario_nombre"></ion-input>
             </ion-item>
           </ion-col>
-        </ion-row>
-
-        <ion-row>
-          <ion-col size="12">
+          <ion-col size-md="6" size="12">
             <ion-item>
               <ion-label position="floating">Apellido</ion-label>
-              <ion-input inputmode="text" formControlName="apellido"></ion-input>
+              <ion-input inputmode="text" formControlName="usuario_apellido"></ion-input>
             </ion-item>
           </ion-col>
         </ion-row>
 
         <ion-row>
-          <ion-col size="12">
+          <ion-col size-md="3" size="12">
             <ion-item>
               <ion-label position="floating">Número Celular</ion-label>
-              <ion-input formControlName="celular" inputmode="number"></ion-input>
+              <ion-input formControlName="usuario_celular" inputmode="number"></ion-input>
             </ion-item>
           </ion-col>
-        </ion-row>
-
-        <ion-row>
-          <ion-col size="12">
+          <ion-col size-md="5" size="12">
             <ion-item>
               <ion-label position="floating">Correo Electrónico</ion-label>
-              <ion-input formControlName="correo" inputmode="email"></ion-input>
+              <ion-input formControlName="usuario_email" inputmode="email"></ion-input>
             </ion-item>
           </ion-col>
-        </ion-row>
-
-        <ion-row>
-          <ion-col size="12">
+          <ion-col size-md="4" size="12">
             <ion-item>
               <ion-label position="floating">Contraseña</ion-label>
-              <ion-input formControlName="contrasena" [type]="passwordTypeInput"></ion-input>
+              <ion-input formControlName="usuario_password" [type]="passwordTypeInput"></ion-input>
               <ion-button fill="clear" slot="end" class="btn_eye_icon" (click)="showPassword()">
                 <ion-icon [name]="passwordTypeInput === 'texto' ? 'eye-outline' : 'eye-off-outline'"></ion-icon>
               </ion-button>
@@ -94,7 +85,7 @@
     </ion-list>
 
     <ion-item lines="none">
-      <ion-checkbox style="margin-right: 0.5em;" formControlName="terminos"></ion-checkbox>
+      <ion-checkbox style="margin-right: 0.5em;" formControlName="usuario_terminos"></ion-checkbox>
       <ion-label>
         Acepto
         <a href="javascript:;">Términos y condiciones</a>

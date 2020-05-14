@@ -1,66 +1,64 @@
-<ion-header>
+<ion-header class="ion-no-border">
+
   <ion-toolbar>
-    <ion-title>Login</ion-title>
+    <ion-title>Iniciar Sesión</ion-title>
   </ion-toolbar>
+
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
 
-<ion-list>
+  <form name="newForm" [formGroup]="newForm">
+    <ion-list>
 
+      <ion-grid fixed>
 
+        <ion-row>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Correo Electrónico</ion-label>
+              <ion-input formControlName="email" inputmode="email"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
 
+        <ion-row>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Contraseña</ion-label>
+              <ion-input formControlName="password" [type]="passwordTypeInput"></ion-input>
+              <ion-button fill="clear" slot="end" class="btn_eye_icon" (click)="showPassword()">
+                <ion-icon [name]="passwordTypeInput === 'texto' ? 'eye-outline' : 'eye-off-outline'"></ion-icon>
+              </ion-button>
+            </ion-item>
+          </ion-col>
+        </ion-row>
 
-</ion-list>
+      </ion-grid>
 
-<form #formulario="ngForm" (ngSubmit)="onSubmitTemplate()">  
+    </ion-list>
 
+    <ion-button (click)="loggeo(newForm.value)" expand="full" fill="solid">
+      Iniciar Sesión
+    </ion-button>
 
-
-
-
-
-  <ion-list>
-
-
-    
-<ion-item>
-
-  <ion-label position = "floating">Email </ion-label>
-  <ion-input type="email"
-                  name="email"
-                  pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
-                  [(ngModel)]="usuario.email"
-                  required>
-               </ion-input>
-</ion-item>
-
-
-<ion-item>
-
-  <ion-label position = "floating">Password </ion-label>
-  <ion-input type="password"
-                  name="password"
-            
-              [(ngModel)]="usuario.password"
-                  required>
-               </ion-input>
-</ion-item>
+    <ion-button expand="full" fill="solid" color="danger" (click)="loggeoGoogle()">
+      <ion-icon slot="start" name="logo-google"></ion-icon>
+      Iniciar sesión con Google
+    </ion-button>
 
 
-  </ion-list>
- 
-<ion-button expand = "full" type = "submit"
-[disabled]= "formulario.invalid">
-Login 
+    <ion-item lines="none">
+      <ion-label>
+        ¿No tienes cuenta? 
+        <a routerLink="/registro-clientes">Registrate</a>
+      </ion-label>
+    </ion-item>
 
-</ion-button>
+  </form>
 
-
-</form>
-
-
-
+  <!-- {{ newForm.value | json }} -->
 
 
 </ion-content>
+

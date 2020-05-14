@@ -12,3 +12,7 @@
 .btn_eye_icon:focus{
     outline: none  !important;
 }
+
+.toast {
+    --button-color: var(--ion-color-primary) !important;
+}
