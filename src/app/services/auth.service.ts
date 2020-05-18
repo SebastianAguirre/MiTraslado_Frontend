@@ -8,24 +8,33 @@ import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
 
-  constructor(private _database: AngularFirestore, private _databaseAuth: AngularFireAuth, private router: Router) { }
+  constructor(private _database: AngularFirestore, public _databaseAuth: AngularFireAuth, private router: Router) { }
 
-  async createUser(form: UsuarioInfo): Promise<void> {
+  async createCliente(form: UsuarioInfo): Promise<void> {
     const {usuario_email: correo, usuario_password: password } = form;
     try {
       const user_auth = await this._databaseAuth.createUserWithEmailAndPassword(correo, password);
-      return await this._database.collection('usuarios').doc(user_auth.user.uid).set(form);
+      await this.sendVerificationEmail();
+      return await this._database.collection('clientes').doc(user_auth.user.uid).set({
+        nombre_user: form.usuario_nombre,
+        apellido_user: form.usuario_apellido
+      });
     } catch (error) {
-      return error.message;
+      return error;
     }
   }
 
-  async singIn(form: {email: string, password: string}){
-    return await this._databaseAuth.signInWithEmailAndPassword(form.email, form.password);
+  async sendVerificationEmail(): Promise<void> {
+    return (await this._databaseAuth.currentUser).sendEmailVerification();
   }
 
+  async singIn(form: {email: string, password: string}): Promise<firebase.auth.UserCredential>{
+    return await this._databaseAuth.signInWithEmailAndPassword(form.email, form.password);
+  }
+  
   async singInWithGoogle(){
     try {
       const provider = new firebase.auth.GoogleAuthProvider();

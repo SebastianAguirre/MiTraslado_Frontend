@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-input-password',
@@ -7,15 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InputPasswordComponent implements OnInit {
 
-  passwordTypeInput = 'password';
-  contrasena = '';
+  @Input() typeInput: string;
+  @Output() newTypeInput = new EventEmitter<string>();
 
   constructor() { }
 
   ngOnInit() {}
 
-  showPassword() {
-    this.passwordTypeInput = this.passwordTypeInput === 'password' ? 'texto' : 'password';
+  showPassword(): void {
+    this.typeInput = this.typeInput === 'password' ? 'text' : 'password';
+    this.newTypeInput.emit(this.typeInput);
   }
 
 }

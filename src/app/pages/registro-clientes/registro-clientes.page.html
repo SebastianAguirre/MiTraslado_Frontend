@@ -1,89 +1,68 @@
 <ion-header class="ion-no-border">
-
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="home" text="" icon="chevron-back-outline" color="primary" defaultHref="/"></ion-back-button>
     </ion-buttons>
     <ion-title>Registrarse</ion-title>
   </ion-toolbar>
-
 </ion-header>
 
 <ion-content class="ion-padding">
-
   <form name="newForm" [formGroup]="newForm">
     <ion-list>
-
       <ion-grid fixed>
-
-        <ion-row>
-          <ion-col size="5">
-            <ion-item>
-              <ion-label position="floating">Tipo de Documento</ion-label>
-              <ion-select placeholder="Seleccione" interface="popover" formControlName="usuario_tipoDocumento">
-                <ion-select-option value="1">C.C</ion-select-option>
-                <ion-select-option value="2">T.I</ion-select-option>
-              </ion-select>
-            </ion-item>
-          </ion-col>
-          <ion-col size="7">
-            <ion-item>
-              <ion-label position="floating">N° Documento</ion-label>
-              <ion-input inputmode="text" formControlName="usuario_documento"></ion-input>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-
         <ion-row>
           <ion-col size-md="6" size="12">
             <ion-item>
               <ion-label position="floating">Nombre(s)</ion-label>
               <ion-input inputmode="text" formControlName="usuario_nombre"></ion-input>
             </ion-item>
+            <!-- formControl Errors -->
+            <ion-item *ngIf="newForm.controls.usuario_nombre.hasError('pattern')" lines="none">
+              <ion-text color="danger" class="form-error">
+                Nombre(s) inválido(s).
+              </ion-text>
+            </ion-item>
+            <!-- Fin formControl Errors -->
           </ion-col>
           <ion-col size-md="6" size="12">
             <ion-item>
               <ion-label position="floating">Apellido</ion-label>
               <ion-input inputmode="text" formControlName="usuario_apellido"></ion-input>
             </ion-item>
+            <!-- formControl Errors -->
+            <ion-item *ngIf="newForm.controls.usuario_apellido.hasError('pattern')" lines="none">
+              <ion-text color="danger" class="form-error">
+                Apellido(s) inválido(s).
+              </ion-text>
+            </ion-item>
+            <!-- Fin formControl Errors -->
           </ion-col>
         </ion-row>
-
         <ion-row>
-          <ion-col size-md="3" size="12">
-            <ion-item>
-              <ion-label position="floating">Número Celular</ion-label>
-              <ion-input formControlName="usuario_celular" inputmode="number"></ion-input>
-            </ion-item>
-          </ion-col>
-          <ion-col size-md="5" size="12">
+          <ion-col size="12">
             <ion-item>
               <ion-label position="floating">Correo Electrónico</ion-label>
               <ion-input formControlName="usuario_email" inputmode="email"></ion-input>
             </ion-item>
+            <!-- formControl Errors -->
+            <ion-item *ngIf="newForm.controls.usuario_email.hasError('pattern')" lines="none">
+              <ion-text color="danger" class="form-error">
+                Correo electrónico inválido.
+              </ion-text>
+            </ion-item>
+            <!-- Fin formControl Errors -->
           </ion-col>
-          <ion-col size-md="4" size="12">
+          <ion-col size="12">
             <ion-item>
               <ion-label position="floating">Contraseña</ion-label>
               <ion-input formControlName="usuario_password" [type]="passwordTypeInput"></ion-input>
-              <ion-button fill="clear" slot="end" class="btn_eye_icon" (click)="showPassword()">
-                <ion-icon [name]="passwordTypeInput === 'texto' ? 'eye-outline' : 'eye-off-outline'"></ion-icon>
-              </ion-button>
+              <app-input-password [typeInput]="passwordTypeInput" (newTypeInput)="passwordTypeInput = $event"></app-input-password>
             </ion-item>
-            <!-- Input Error
-              <ion-item *ngIf="true" lines="none">
-              <ion-text color="danger" class="form-error">
-                Please enter a valid email address.
-              </ion-text>
-            </ion-item>
-           -->
           </ion-col>
         </ion-row>
-
       </ion-grid>
-
     </ion-list>
-
     <ion-item lines="none">
       <ion-checkbox style="margin-right: 0.5em;" formControlName="usuario_terminos"></ion-checkbox>
       <ion-label>
@@ -91,11 +70,8 @@
         <a href="javascript:;">Términos y condiciones</a>
       </ion-label>
     </ion-item>
-
-    <ion-button (click)="addUser(newForm.value)" expand="full" fill="solid" [disabled]="newForm.invalid">
+    <ion-button (click)="addCliente(newForm.value)" expand="full" fill="solid" [disabled]="newForm.invalid">
       Registrarme
     </ion-button>
-
-  </form>
-
+  </form>  
 </ion-content>

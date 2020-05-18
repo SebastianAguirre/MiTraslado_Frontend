@@ -19,7 +19,7 @@ export class AuthLogOutGuard implements CanActivate {
       return this._databaseAuth.authState
                 .pipe( 
                   map( userAuth => {
-                    if(isNullOrUndefined(userAuth)) {
+                    if(isNullOrUndefined(userAuth) || !userAuth.emailVerified) {
                       return true;
                     }else {
                       this.router.navigate(['/dashboard']);

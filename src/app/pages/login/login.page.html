@@ -1,18 +1,13 @@
 <ion-header class="ion-no-border">
-
   <ion-toolbar>
     <ion-title>Iniciar Sesión</ion-title>
   </ion-toolbar>
-
 </ion-header>
 
-<ion-content class="ion-padding">
-
+<ion-content class="ion-padding"> 
   <form name="newForm" [formGroup]="newForm">
     <ion-list>
-
       <ion-grid fixed>
-
         <ion-row>
           <ion-col size="12">
             <ion-item>
@@ -21,44 +16,31 @@
             </ion-item>
           </ion-col>
         </ion-row>
-
         <ion-row>
           <ion-col size="12">
             <ion-item>
               <ion-label position="floating">Contraseña</ion-label>
               <ion-input formControlName="password" [type]="passwordTypeInput"></ion-input>
-              <ion-button fill="clear" slot="end" class="btn_eye_icon" (click)="showPassword()">
-                <ion-icon [name]="passwordTypeInput === 'texto' ? 'eye-outline' : 'eye-off-outline'"></ion-icon>
-              </ion-button>
+              <app-input-password [typeInput]="passwordTypeInput" (newTypeInput)="passwordTypeInput = $event"></app-input-password>
             </ion-item>
           </ion-col>
         </ion-row>
-
       </ion-grid>
-
     </ion-list>
-
-    <ion-button (click)="loggeo(newForm.value)" expand="full" fill="solid">
+    <ion-button expand="full" fill="solid" (click)="singIn(newForm.value)">
+      <ion-icon slot="start" name="log-in-outline"></ion-icon>
       Iniciar Sesión
     </ion-button>
-
-    <ion-button expand="full" fill="solid" color="danger" (click)="loggeoGoogle()">
+    <ion-button expand="full" fill="solid" color="danger" (click)="singInWithGoogle()">
       <ion-icon slot="start" name="logo-google"></ion-icon>
       Iniciar sesión con Google
     </ion-button>
-
-
-    <ion-item lines="none">
+    <ion-item lines="none" class="ion-text-center">
       <ion-label>
         ¿No tienes cuenta? 
-        <a routerLink="/registro-clientes">Registrate</a>
+        <a routerLink="/registro-clientes" style="text-decoration: none;">Registrate</a>
       </ion-label>
     </ion-item>
-
   </form>
-
-  <!-- {{ newForm.value | json }} -->
-
-
 </ion-content>
 

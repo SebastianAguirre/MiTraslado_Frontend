@@ -19,12 +19,11 @@ export class AuthLogInGuard implements CanActivate {
       return this._databaseAuth.authState
                 .pipe( 
                   map( userAuth => {
-                    if(userAuth) {
+                    if(userAuth && userAuth.emailVerified) {
                       return true;
                     }else {
                       this.router.navigate(['/login']);
                       return false;
-
                     }
                   })
                 );

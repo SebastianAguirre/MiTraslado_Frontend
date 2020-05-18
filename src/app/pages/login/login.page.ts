@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { InputPasswordComponent } from 'src/app/components/input-password/input-password.component';
+import { AlertController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -12,10 +12,10 @@ import { InputPasswordComponent } from 'src/app/components/input-password/input-
 
 export class LoginPage implements OnInit {
 
-  passwordTypeInput = 'password';
+  public passwordTypeInput: string = 'password';
   newForm: FormGroup;
 
-  constructor(private _auth: AuthService, private router: Router) { }
+  constructor(private _auth: AuthService, private router: Router, private alertCtrl: AlertController, private toastCtrl: ToastController) {}
 
   ngOnInit(): void {
     this.newForm = this.createForm();
@@ -28,20 +28,20 @@ export class LoginPage implements OnInit {
     });
   }
 
-  async loggeo(form){
+  async singIn(form) {
     try {
-      await this._auth.singIn(form);
-      this.router.navigate(['/dashboard']);
+      const response = await this._auth.singIn(form);
+      if(!response.user.emailVerified){
+        this.reenviarVerificacion();
+      }else{
+        this.router.navigate(['/dashboard']);
+      }
     } catch (error) {
-      console.log(error);
+      this.showMensajeError('Correo y/o contraseña incorrectos');
     }
   }
 
-  showPassword(): void {
-    this.passwordTypeInput = this.passwordTypeInput === 'password' ? 'texto' : 'password';
-  }
-
-  async loggeoGoogle() {
+  async singInWithGoogle() {
     try {
       await this._auth.singInWithGoogle();
       this.router.navigate(['/dashboard']);
@@ -50,12 +50,40 @@ export class LoginPage implements OnInit {
     }
   }
 
+  async reenviarVerificacion() {
+    const alert = await this.alertCtrl.create({
+      header: '¡Atención!',
+      message: 'Debes de verificar tu correo antes de iniciar sesión.',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary'
+        }, 
+        {
+          text: 'Reenviar verificación',
+          handler: () => {
+            this._auth.sendVerificationEmail();
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
 
-
-
-
-
-
-
+  async showMensajeError(message: string) {
+    const mensaje = await this.toastCtrl.create({
+      message,
+      duration: 2500,
+      animated: true,
+      buttons: [
+        {
+          text: 'Ok',
+          role: 'cancel'
+        }
+      ]
+    });
+    mensaje.present();
+  }
 }
 
